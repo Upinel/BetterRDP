@@ -1,0 +1,55 @@
+Windows Registry Editor Version 5.00
+;Please backup your computer before applying these settings
+;Set up the Group Policy to allow GPU and RemoteFx during RDP session
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services]
+"SelectTransport"=dword:00000000
+"fEnableVirtualizedGraphics"=dword:00000001
+"VGOptimization_CaptureFrameRate"=dword:00000002
+"VGOptimization_CompressionRatio"=dword:00000002
+"VisualExperiencePolicy"=dword:00000001
+"bEnumerateHWBeforeSW"=dword:00000001
+"fEnableRemoteFXAdvancedRemoteApp"=dword:00000001
+"AVC444ModePreferred"=dword:00000001
+"AVCHardwareEncodePreferred"=dword:00000001
+"MaxCompressionLevel"=dword:00000002
+"ImageQuality"=dword:00000003
+"GraphicsProfile"=dword:00000002
+;Set up the Group Policy to allow GPU and RemoteFx during RDP session
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Group Policy Objects\{1876AA70-1859-483F-BE08-7045469B7989}Machine\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services]
+"SelectTransport"=dword:00000000
+"fEnableVirtualizedGraphics"=dword:00000001
+"VGOptimization_CaptureFrameRate"=dword:00000002
+"VGOptimization_CompressionRatio"=dword:00000002
+"VisualExperiencePolicy"=dword:00000001
+"bEnumerateHWBeforeSW"=dword:00000001
+"fEnableRemoteFXAdvancedRemoteApp"=dword:00000001
+"AVC444ModePreferred"=dword:00000001
+"AVCHardwareEncodePreferred"=dword:00000001
+"MaxCompressionLevel"=dword:00000002
+"ImageQuality"=dword:00000003
+"GraphicsProfile"=dword:00000002
+;Sets 60 FPS limit on RDP.
+;Source: https://support.microsoft.com/en-us/help/2885213/frame-rate-is-limited-to-30-fps-in-windows-8-and-windows-server-2012-r
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations]
+"DWMFRAMEINTERVAL"=dword:0000000f
+;Increase Windows Responsivness
+;Source:https://www.reddit.com/r/killerinstinct/comments/4fcdhy/an_excellent_guide_to_optimizing_your_windows_10/
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile]
+"SystemResponsiveness"=dword:00000000
+;Sets the flow control for Display vs Channel Bandwidth (aka RemoteFX devices, including controllers.)
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TermDD]
+"FlowControlDisable"=dword:00000001
+"FlowControlDisplayBandwidth"=dword:0000010
+"FlowControlChannelBandwidth"=dword:0000090
+"FlowControlChargePostCompression"=dword:00000000
+;Removes the artificial latency delay for RDP.
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp]
+"InteractiveDelay"=dword:00000000
+;Disables Windows Network Throtelling.
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters]
+"DisableBandwidthThrottling"=dword:00000001
+;Enables large MTU packets.
+"DisableLargeMtu"=dword:00000000
+;Disables the WDDM Drivers and goes back to legacy XDDM drivers. (better for performance on Nvidia cards, you might want to change this setting for AMD cards.)
+;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services]
+;"fEnableWddmDriver"=dword:00000001
