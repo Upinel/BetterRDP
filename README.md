@@ -53,6 +53,10 @@ Credit to the various sources and community contributions from which these setti
 - [Microsoft Support](https://support.microsoft.com/en-us/help/2885213/frame-rate-is-limited-to-30-fps-in-windows-8-and-windows-server-2012-r)
 - [Reddit Windows 10 Optimization Guide](https://www.reddit.com/r/killerinstinct/comments/4fcdhy/an_excellent_guide_to_optimizing_your_windows_10/)
 
+
+## License
+This project is open source and available under the Apache 2.0 License.
+
 ## Buy me a coffee
 If you wish to donate us, please donate to [https://paypal.me/Upinel](https://paypal.me/Upinel), it will be really lovely.
 
