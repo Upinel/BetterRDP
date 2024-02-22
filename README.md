@@ -1,4 +1,4 @@
-# UpinelBetterRDP Optimization Settings
+# Upinel/BetterRDP Optimization Settings
 
 The `UpinelBetterRDP.reg` is a Windows Registry file that is designed to enhance your Remote Desktop Protocol (RDP) session by enabling 60FPS, GPU acceleration, and RemoteFx features. These optimizations aim to provide a smoother and more responsive remote desktop experience.
 
