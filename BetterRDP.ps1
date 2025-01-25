@@ -354,33 +354,87 @@ function Apply-RDPOptimizations {
     Set-ItemProperty -Path $lanmanPath -Name "DisableLargeMtu" -Value 0 -Type DWord
 }
 
+function Apply-GamingRDPOptimizations {
+    $tsPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services"
+    New-Item -Path $tsPath -Force | Out-Null
+    
+    $tsSettings = @{
+        "SelectTransport" = 0  # UDP preferred
+        "fEnableVirtualizedGraphics" = 1
+        "fEnableRemoteFXAdvancedRemoteApp" = 1
+        "MaxCompressionLevel" = 4  # Increased from 2
+        "VisualExperiencePolicy" = 1
+        "GraphicsProfile" = 2
+        "bEnumerateHWBeforeSW" = 1
+        "AVC444ModePreferred" = 0  # Disabled 4:4:4
+        "AVCHardwareEncodePreferred" = 1
+        "VGOptimization_CaptureFrameRate" = 0x3c  # 60fps
+        "VGOptimization_CompressionRatio" = 4  # More aggressive
+        "ImageQuality" = 2  # Slightly reduced quality
+    }
+    
+    foreach ($setting in $tsSettings.GetEnumerator()) {
+        Set-ItemProperty -Path $tsPath -Name $setting.Key -Value $setting.Value -Type DWord
+    }
+
+    $termDDPath = "HKLM:\SYSTEM\CurrentControlSet\Services\TermDD"
+    New-Item -Path $termDDPath -Force | Out-Null
+    
+    $termDDSettings = @{
+        "FlowControlDisable" = 1
+        "FlowControlDisplayBandwidth" = 0x20  # Increased
+        "FlowControlChannelBandwidth" = 0x90
+        "FlowControlChargePostCompression" = 0
+    }
+    
+    foreach ($setting in $termDDSettings.GetEnumerator()) {
+        Set-ItemProperty -Path $termDDPath -Name $setting.Key -Value $setting.Value -Type DWord
+    }
+
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations" `
+        -Name "DWMFRAMEINTERVAL" -Value 0x08 -Type DWord
+
+    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" `
+        -Name "InteractiveDelay" -Value 0 -Type DWord
+
+    $lanmanPath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters"
+    New-Item -Path $lanmanPath -Force | Out-Null
+    Set-ItemProperty -Path $lanmanPath -Name "DisableBandwidthThrottling" -Value 1 -Type DWord
+    Set-ItemProperty -Path $lanmanPath -Name "DisableLargeMtu" -Value 0 -Type DWord
+}
+
 # Main script execution
 $ErrorActionPreference = "Stop"
 
 Write-Host "BetterRDP Optimization Script" -ForegroundColor Green
 Write-Host "1. Create backup only"
-Write-Host "2. Apply RDP optimizations"
-Write-Host "3. Restore from backup"
-Write-Host "4. Validate optimization status"
-Write-Host "5. Exit"
+Write-Host "2. Apply default RDP optimizations"
+Write-Host "3. Apply gaming RDP optimizations"
+Write-Host "4. Restore from backup"
+Write-Host "5. Validate optimization status"
+Write-Host "6. Exit"
 
-$choice = Read-Host "Please enter your choice (1-5)"
+$choice = Read-Host "Please enter your choice (1-6)"
 
 switch ($choice) {
     "1" {
         Write-Host "Creating backup..." -ForegroundColor Yellow
         $backupPath = Backup-RegistrySettings
-        
         if (Validate-Backup -BackupFile $backupPath) {
             Write-Host "Backup created successfully at: $backupPath" -ForegroundColor Green
         }
     }
     "2" {
-        Write-Host "Applying RDP optimizations..." -ForegroundColor Yellow
+        Write-Host "Applying default RDP optimizations..." -ForegroundColor Yellow
         Apply-RDPOptimizations
         Write-Host "Optimizations applied successfully!" -ForegroundColor Green
     }
     "3" {
+        Write-Host "Applying gaming RDP optimizations..." -ForegroundColor Yellow
+        Apply-GamingRDPOptimizations
+        Write-Host "Gaming optimizations applied successfully!" -ForegroundColor Green
+    }
+    "4" {
         $backupPath = ".\rdp_settings_backup.json"
         if (Test-Path $backupPath) {
             Write-Host "Restoring from backup..." -ForegroundColor Yellow
@@ -390,11 +444,11 @@ switch ($choice) {
             Write-Host "Backup file not found!" -ForegroundColor Red
         }
     }
-    "4" {
+    "5" {
         Write-Host "Validating optimization status..." -ForegroundColor Yellow
         Validate-Optimizations
     }
-    "5" {
+    "6" {
         Write-Host "Exiting script..." -ForegroundColor Yellow
         exit
     }
