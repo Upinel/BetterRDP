@@ -32,6 +32,10 @@ To apply these optimizations:
 
 For enterprise environments, BetterRDP can be deployed centrally via Group Policy Preferences or Startup Scripts. See [GROUP_POLICY.md](GROUP_POLICY.md) for detailed instructions.
 
+### macOS Client Troubleshooting
+
+If you're connecting from a Mac and not seeing 60 FPS despite server-side optimizations, the macOS RDP client has known limitations. See [MACOS_TROUBLESHOOTING.md](MACOS_TROUBLESHOOTING.md) for fixes.
+
 ## Support
 
 - For Windows 8, Windows 10, and Windows Server 2012 or later.
