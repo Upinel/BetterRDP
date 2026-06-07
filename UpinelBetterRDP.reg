@@ -1,5 +1,7 @@
 Windows Registry Editor Version 5.00
 
+; IMPORTANT: This registry file only needs to be applied to the RDP SERVER, not the client machine.
+
 ;  +----------------------------------------------------------------------+
 ;  | Upinel/BetterRDP                                                     |
 ;  +----------------------------------------------------------------------+
