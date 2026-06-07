@@ -28,6 +28,10 @@ To apply these optimizations:
 4. Confirm that you want to apply the changes by clicking 'Yes' when prompted.
 5. Reboot your computer for the changes to take effect.
 
+### Group Policy Deployment
+
+For enterprise environments, BetterRDP can be deployed centrally via Group Policy Preferences or Startup Scripts. See [GROUP_POLICY.md](GROUP_POLICY.md) for detailed instructions.
+
 ## Support
 
 - For Windows 8, Windows 10, and Windows Server 2012 or later.
