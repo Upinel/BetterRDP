@@ -43,11 +43,11 @@ Windows Registry Editor Version 5.00
 
 ;Sets the flow control for Display vs Channel Bandwidth.
 ;Tailor the bandwidth settings for RemoteFX devices, including controllers.
-;Source:https://www.reddit.com/r/killerinstinct/comments/4fcdhy/an_excellent_guide_to_optimizing_your_windows_10/
+;Source:https://petri.com/setting-windows-server-2008-terminal-services-display-data-prioritization/
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TermDD]
 "FlowControlDisable"=dword:00000001
-"FlowControlDisplayBandwidth"=dword:0000010
-"FlowControlChannelBandwidth"=dword:0000090
+"FlowControlDisplayBandwidth"=dword:0000090
+"FlowControlChannelBandwidth"=dword:0000010
 "FlowControlChargePostCompression"=dword:00000000
 
 ;Increase system responsiveness by adjusting foreground vs background tasks priority.
