@@ -222,8 +222,8 @@ function Get-OptimizationSettings {
         }
         "HKLM:\SYSTEM\CurrentControlSet\Services\TermDD" = @{
             "FlowControlDisable" = @{ Value = 1; Type = "DWord" }
-            "FlowControlDisplayBandwidth" = @{ Value = 0x10; Type = "DWord" }
-            "FlowControlChannelBandwidth" = @{ Value = 0x90; Type = "DWord" }
+            "FlowControlDisplayBandwidth" = @{ Value = 0x90; Type = "DWord" }
+            "FlowControlChannelBandwidth" = @{ Value = 0x10; Type = "DWord" }
             "FlowControlChargePostCompression" = @{ Value = 0; Type = "DWord" }
         }
         "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" = @{
@@ -350,8 +350,8 @@ function Apply-RDPOptimizations {
     
     $termDDSettings = @{
         "FlowControlDisable" = 1
-        "FlowControlDisplayBandwidth" = 0x10
-        "FlowControlChannelBandwidth" = 0x90
+        "FlowControlDisplayBandwidth" = 0x90
+        "FlowControlChannelBandwidth" = 0x10
         "FlowControlChargePostCompression" = 0
     }
     
@@ -408,8 +408,8 @@ function Apply-GamingRDPOptimizations {
     
     $termDDSettings = @{
         "FlowControlDisable" = 1
-        "FlowControlDisplayBandwidth" = 0x20  # Increased
-        "FlowControlChannelBandwidth" = 0x90
+        "FlowControlDisplayBandwidth" = 0x99  # Increased
+        "FlowControlChannelBandwidth" = 0x01
         "FlowControlChargePostCompression" = 0
     }
     
