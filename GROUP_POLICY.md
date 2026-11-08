@@ -57,7 +57,16 @@ Deploy `BetterRDP.ps1` as a computer startup script:
 2. In GPMC: **Computer Configuration → Policies → Windows Settings → Scripts → Startup**
 3. Add PowerShell script: `powershell.exe -ExecutionPolicy Bypass -File BetterRDP.ps1`
 
-**Note:** Ensure PowerShell execution policy allows script execution on target machines.
+**Note:** `BetterRDP.ps1` presents an interactive menu (`Read-Host`) and a backup-per-run workflow, so it cannot run unattended. As a startup script it will wait for input that never arrives. For unattended deployment use Method 1, or call the registry writes directly, for example:
+
+```powershell
+$ts = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
+Set-ItemProperty -Path $ts -Name AVC444ModePreferred -Value 1 -Type DWord
+Set-ItemProperty -Path $ts -Name AVCHardwareEncodePreferred -Value 1 -Type DWord
+Set-ItemProperty -Path $ts -Name bEnumerateHWBeforeSW -Value 1 -Type DWord
+Set-ItemProperty -Path $ts -Name GraphicsProfile -Value 2 -Type DWord
+Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations' -Name DWMFRAMEINTERVAL -Value 15 -Type DWord
+```
 
 ## Testing
 

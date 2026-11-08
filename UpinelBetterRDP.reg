@@ -72,7 +72,11 @@ Windows Registry Editor Version 5.00
 "DisableLargeMtu"=dword:00000000
 
 ; This setting is optional and affects the display driver model used in RDP sessions.
+; It maps to the policy "Use WDDM graphics display driver for Remote Desktop Connections":
+;   dword:00000001 = use WDDM (the default)
+;   dword:00000000 = fall back to XDDM (no longer recommended)
+; The policy is only honoured on Windows 10 1903-2004; later builds ignore it.
 ; Uncomment the following lines if you wish to use XDDM drivers on Nvidia cards.
 ; Note: May not be beneficial for AMD cards or certain configurations.
 ;[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services]
-;"fEnableWddmDriver"=dword:00000001
+;"fEnableWddmDriver"=dword:00000000

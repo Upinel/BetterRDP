@@ -36,9 +36,14 @@ For enterprise environments, BetterRDP can be deployed centrally via Group Polic
 
 If you're connecting from a Mac and not seeing 60 FPS despite server-side optimizations, the macOS RDP client has known limitations. See [MACOS_TROUBLESHOOTING.md](MACOS_TROUBLESHOOTING.md) for fixes.
 
+### Verified Behaviour on Windows 10/11
+
+Most of these values were written for the RemoteFX era of Windows 7 and Windows Server 2008 R2 SP1. [VERIFICATION.md](VERIFICATION.md) records measured results on a current Windows host: which entries are still read by Windows, which are inert, what actually lifts the 30 fps ceiling, and what each change costs in bandwidth and image quality.
+
 ## Support
 
 - For Windows 8, Windows 10, and Windows Server 2012 or later.
+- RemoteFX-related entries (`VisualExperiencePolicy`, `VGOptimization_*`, `fEnableVirtualizedGraphics`) only have a consumer on Windows 7 / Windows Server 2008 R2 SP1. See [VERIFICATION.md](VERIFICATION.md).
 - It is advisable to perform these changes on machines where you have full permissions and control.
 - It is always better to test the settings on a non-production machine before applying them to a live environment.
 
@@ -52,6 +57,8 @@ If you encounter any issues or have suggestions, please open an issue within the
 
 ## License
 
+This project is open source and available under the Apache 2.0 License.
+
 These settings are provided "as is", with no warranties, and confer no rights. You are responsible for using these settings safely and within the terms of your software licensing agreements.
 
 ## Acknowledgments
@@ -61,9 +68,6 @@ Credit to the various sources and community contributions from which these setti
 - [Microsoft Support](https://support.microsoft.com/en-us/help/2885213/frame-rate-is-limited-to-30-fps-in-windows-8-and-windows-server-2012-r)
 - [Reddit Windows 10 Optimization Guide](https://www.reddit.com/r/killerinstinct/comments/4fcdhy/an_excellent_guide_to_optimizing_your_windows_10/)
 
-
-## License
-This project is open source and available under the Apache 2.0 License.
 
 ## Buy me a coffee
 If you wish to donate us, please donate to [https://paypal.me/Upinel](https://paypal.me/Upinel), it will be really lovely.
